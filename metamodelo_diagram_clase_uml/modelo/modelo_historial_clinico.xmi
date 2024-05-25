@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetamodeloSimplificadoUML:Package
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:MetamodeloSimplificadoUML="http://metamodelo-simplificado-uml.ecore"
+    xsi:schemaLocation="http://metamodelo-simplificado-uml.ecore ../metamodelado/metamodelo_simplificado_diagrama_clase.ecore">
+  <primitivedatatype
+      name="String"/>
+  <primitivedatatype
+      name="Date"/>
+  <Class name="Usuario">
+    <attribute
+        name="id"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="email"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="contrasena"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="rol"
+        type="//@Class.4"/>
+  </Class>
+  <Class name="DatosPersonales">
+    <attribute
+        name="nombres"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="apellidos"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="dni"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="direccion"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="telefono"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="usuario"
+        type="//@Class.0"/>
+  </Class>
+  <Class name="HistorialClinico">
+    <attribute
+        name="fecha_cita"
+        type="//@primitivedatatype.1"/>
+    <attribute
+        name="datos_generales_paciente"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="datos_exploracion"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="diagnostico"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="pronostico"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="tratamiento"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="usuario"
+        type="//@Class.0"/>
+  </Class>
+  <Class name="AnalisisLaboratorio">
+    <attribute
+        name="sangre"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="orina"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="heces"
+        type="//@primitivedatatype.0"/>
+    <attribute
+        name="historialClinico"
+        type="//@Class.2"/>
+  </Class>
+  <Class name="Roles">
+    <attribute
+        name="name"
+        type="//@primitivedatatype.0"/>
+  </Class>
+</MetamodeloSimplificadoUML:Package>
