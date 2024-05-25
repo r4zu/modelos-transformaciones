@@ -1,0 +1,41 @@
+enum Roles {
+Cliente,
+Doctor,
+Admin
+}
+
+class Usuario {
+String id;
+String email;
+String contrasena;
+Roles rol;
+}
+
+class DatosPersonales {
+String nombres;
+String apellido;
+String dni;
+String direccion;
+String telefono;
+}
+
+class HistorialClinico {
+Date fecha_cita;
+String datos_generales_paciente;
+String datos_exploracion;
+String diagnostico;
+String pronostico;
+String tratamiento;
+}
+
+class AnalisisLaboratorio {
+String sangre;
+String orina;
+String heces;
+}
+
+association {
+1 Usuario -- 1 DatosPersonales;
+1 Usuario <@>- * HistorialClinico;
+1 HistorialClinico <@>- * AnalisisLaboratorio;
+}

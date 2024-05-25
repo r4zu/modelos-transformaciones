@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Diagramas a partir de texto</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link type=‘text/css’ rel=‘stylesheet’
+    href=‘https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/css/UDStyle.css’
+    media=‘screen’ />
+
+    <script
+      type="text/javascript"
+      src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDCore.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDModules.js"
+    ></script>
+
+    <script type="text/javascript">
+      window.onload = function () {
+        var classDiagram = new UMLClassDiagram({
+          id: 'classDiagram',
+          width: 1000,
+          height: 500,
+        });
+        classDiagram.setName('Modelo PIM Historial Clínico');
+
+        // CLASES
+        var usuario = new UMLClass({ x: 350, y: 100 });
+        var datos_personales = new UMLClass({ x: 320, y: 300 });
+        var historial_clinico = new UMLClass({ x: 600, y: 120 });
+        var analisis_laboratorio = new UMLClass({ x: 600, y: 305 });
+        var roles = new UMLClass({ x: 100, y: 100 });
+
+        usuario.setName('Usuario');
+        usuario.addAttribute('+id:String');
+        usuario.addAttribute('+email:String');
+        usuario.addAttribute('+password:String');
+        usuario.addAttribute('+roles:Roles');
+
+        roles.setName('<<enumeration>>\nRoles');
+        roles.addAttribute('CLIENTE');
+        roles.addAttribute('DOCTOR');
+        roles.addAttribute('ADMIN');
+
+        datos_personales.setName('DatosPersonales');
+        datos_personales.addAttribute('+nombres:String');
+        datos_personales.addAttribute('+apellidos:String');
+        datos_personales.addAttribute('+dni:String');
+        datos_personales.addAttribute('+direccion:String');
+        datos_personales.addAttribute('+telefono:String');
+        datos_personales.addOperation('+getNombres():String');
+        datos_personales.addOperation('+setNombres(nombres)');
+
+        historial_clinico.setName('HistorialClinico');
+        historial_clinico.addAttribute('+fecha_cita: Date');
+        historial_clinico.addAttribute('+datos_generales_paciente: String');
+        historial_clinico.addAttribute('+datos_exploracion: String');
+        historial_clinico.addAttribute('+diagnostico: String');
+        historial_clinico.addAttribute('+pronostico: String');
+        historial_clinico.addAttribute('+tratamiento: String');
+
+        analisis_laboratorio.setName('AnalisisLaboratorio');
+        analisis_laboratorio.addAttribute('+sangre: String');
+        analisis_laboratorio.addAttribute('+orina: String');
+        analisis_laboratorio.addAttribute('+heces: String');
+
+        classDiagram.addElement(usuario);
+        classDiagram.addElement(roles);
+        classDiagram.addElement(datos_personales);
+        classDiagram.addElement(historial_clinico);
+        classDiagram.addElement(analisis_laboratorio);
+
+        // RELACIONES
+        var composicion = new UMLAssociation({
+          a: usuario,
+          b: datos_personales,
+        });
+        composicion.setValue('name', 'tiene');
+        composicion.setMultiplicityA('1');
+        composicion.setMultiplicityB('1');
+        classDiagram.addElement(composicion);
+
+        var dependencia1 = new UMLDependency({
+          a: usuario,
+          b: roles,
+        });
+        classDiagram.addElement(dependencia1);
+
+        var composicion1 = new UMLComposition({
+          a: usuario,
+          b: historial_clinico,
+        });
+        composicion1.setValue('name', 'tiene');
+        composicion1.setMultiplicityA('1');
+        composicion1.setMultiplicityB('*');
+        classDiagram.addElement(composicion1);
+
+        var composicion2 = new UMLComposition({
+          a: historial_clinico,
+          b: analisis_laboratorio,
+        });
+        composicion2.setValue('name', 'tiene');
+        composicion2.setMultiplicityA('1');
+        composicion2.setMultiplicityB('*');
+        classDiagram.addElement(composicion2);
+
+        classDiagram.draw();
+        classDiagram.interaction(true);
+      };
+    </script>
+  </head>
+
+  <body>
+    <div class="row">
+      <div class="col-md-10 m-auto my-5">
+        <div class="card">
+          <div class="card-header">
+            <strong>Diagrama de clases con jsUML2 (PIM)</strong>
+          </div>
+          <div class="card-body">
+            <p>
+              Ejemplo librería
+              <a
+                target="_blank"
+                href="https://www.uco.es/users/in1rosaj//tools/jsUML2/doc/TheProgrammersGuide_003.htm"
+                >jsUML2</a
+              >
+              para crear diagramas a partir de texto y su
+              <a
+                target="_blank"
+                href="https://www.uco.es/~in1rosaj/tools/jsUML2/editor/index.html"
+                >Live editor</a
+              >
+            </p>
+            <div id="classDiagram"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

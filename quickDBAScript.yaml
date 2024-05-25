@@ -1,0 +1,40 @@
+Usuario
+-
+id PK int
+email text
+contrasena text
+rol_id int FK - Roles.id
+
+Roles
+-
+id PK int
+nombre_rol text
+
+DatosPersonales
+-
+id PK int
+nombres text
+apellidos text
+dni text
+direccion text
+telefono text
+usuario_id int FK - Usuario.id
+
+HistorialClinico
+-
+id PK int
+fecha_cita text
+datos_generales_paciente text
+datos_exploracion text
+diagnostico text
+pronostico text
+tratamiento text
+usuario_id int FK >- Usuario.id
+
+AnalisisLaboratorio
+-
+id PK int
+sangre text
+orina text
+heces text
+historial_clinico_id int FK >0- HistorialClinico.id
